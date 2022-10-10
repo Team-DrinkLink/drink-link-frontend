@@ -97,6 +97,13 @@ FE for DrinkLink application
         - Slack
         - Before 6pm PST
 
+### Database Schema Diagram
+
+`{
+userName:”string”
+userEmail: “string@string”
+drinkFavorites: [{favorite 1}{favorite 2}]
+}`
 
 
 

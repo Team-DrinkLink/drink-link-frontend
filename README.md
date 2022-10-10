@@ -1,4 +1,4 @@
-# drink-link-frontend
+# Drink-Link-Frontend
 FE for DrinkLink application
 
 ### Project Description

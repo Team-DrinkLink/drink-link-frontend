@@ -37,6 +37,7 @@ FE for DrinkLink application
     - Communicate
     - Checkin’s where everyone has a chance to say something
     - Creating a place where we can talk about conflict
+    - If we can't agree on something, we will vote and take majority opinion, if tied we will flip a coin (https://justflipacoin.com/)
 - What will your team do if one person is taking over the project and not letting the other members contribute?
     - Division of tasks
     - Communicate with team members

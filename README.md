@@ -104,6 +104,3 @@ userName:”string”
 userEmail: “string@string”
 drinkFavorites: [{favorite 1}{favorite 2}]
 }`
-
-
-

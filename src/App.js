@@ -30,7 +30,6 @@ componentDidMount = async ()=> {
   render(){
     return(
       <>
-        <h1>test</h1>
       </>
     );
   }

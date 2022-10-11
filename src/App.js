@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import './Styles/App.scss'
+// import dotenv from 'dotenv'
 import Footer from './Components/Footer.js';
 import Header from './Components/Header.js';
 import {
@@ -7,7 +9,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import './App.css';
 import Home from './Components/Home.js'
 import Drink from './Components/Drink.js';
 import Favorites from './Components/Favorites.js';
@@ -26,28 +27,31 @@ class App extends React.Component{
   }
 
 componentDidMount = async ()=> {
+
+  //Sage: sets initial images to be margaritas until search changes the results
+
   try{
-    let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
+    // let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
+    let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?+s=margarita`
     let request = await axios.get(PATH);
-    this.setState({drinks: request.drinks})
+    console.log(request.data);
+    this.setState({drinks: request.data});
   }catch(error){
     console.log("Mounting error - ", error);
   }
 }
-getDrinks = async () => {
 
-try{
-  let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-  let request = await axios.get(PATH);
-  this.setState({drinks: request.drinks})
-}catch(error){
-  console.log("Mounting error - ", error);
-}
-}
- 
-// searchTerm = async (search) => {
-//   let FIND = `${process.env.REACT_APP_SERVER_API}s={}`
+// getDrinks = async () => {
+
+//   try{
+//     let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
+//     let request = await axios.get(PATH);
+//     this.setState({drinks: request.drinks})
+//   }catch(error){
+//     console.log("Mounting error - ", error);
+//   }
 // }
+ 
 
   render(){
     return(

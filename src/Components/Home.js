@@ -25,7 +25,7 @@ class Home extends React.Component {
                         </Button>
                     </Form>
                 </Container>
-                <Container>
+                <Container className='cardDisplay'>
                   
                     <Card style={{ width: '18rem' }}>
                         <Card.Header>Drink #1</Card.Header>

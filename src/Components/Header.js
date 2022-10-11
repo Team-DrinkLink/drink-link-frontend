@@ -3,6 +3,7 @@ import { Navbar, NavItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Styles/App.scss";
+import AuthButtons from "./AuthButtons";
 
 class Header extends React.Component {
   render() {

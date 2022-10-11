@@ -10,8 +10,8 @@ class Header extends React.Component {
         <Navbar.Brand>Welcome to DrinkLink</Navbar.Brand>
         <NavItem><Link to="/" className="nav-link" style={{color: "white"}} >Home</Link></NavItem>
         <NavItem><Link to="/favorites" className="nav-link" style={{color: "white"}}>Favorites</Link></NavItem>
-        <NavItem><Link to="/" className="nav-link" style={{color: "white"}}>Login</Link></NavItem>
-        <NavItem><Link to="/" className="nav-link" style={{color: "white"}}>Logout</Link></NavItem>
+        {/* <NavItem><Link className="nav-link" style={{color: "white"}} onClick={this.props.loginClick}>Login</Link></NavItem>
+        <NavItem><Link to="/" className="nav-link" style={{color: "white"}}>Logout</Link></NavItem> */}
       </Navbar>
     )
   }

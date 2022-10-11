@@ -1,8 +1,12 @@
 import React from 'react';
 import {Form, Container, Button, Card} from 'react-bootstrap';
+import UserLoginModal from './UserLoginModal';
 
 
 class Home extends React.Component {
+
+
+
     render() {
         return (
             <>
@@ -59,6 +63,11 @@ class Home extends React.Component {
                     </Card>
                  
                 </Container>
+                <UserLoginModal
+                    showModal={this.props.showModal}
+                    hideModal={this.props.hideModal}
+                    handleUserCreate={this.handleUserCreate}
+                    />
 
             </>
         )

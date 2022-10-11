@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.1.2",
+    "bootstrap": "^5.2.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
@@ -40,7 +41,7 @@
     ]
   },
   "description": "FE for DrinkLink application",
-  "main": "App.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Team-DrinkLink/drink-link-frontend.git"
@@ -50,5 +51,5 @@
   "bugs": {
     "url": "https://github.com/Team-DrinkLink/drink-link-frontend/issues"
   },
-  "homepage": "https://github.com/Team-DrinkLink/drink-link-frontend#readme"
+  "homepage": "/"
 }

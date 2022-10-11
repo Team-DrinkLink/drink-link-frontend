@@ -26,31 +26,23 @@ class App extends React.Component{
     }
   }
 
-componentDidMount = async ()=> {
+componentDidMount() {
+  this.getDrinks()
+  // console.log(this.state.drinkResults)
+}
 
+getDrinks = async () => {
   //Sage: sets initial images to be margaritas until search changes the results
-
   try{
     // let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-    let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?+s=margarita`
+    let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
     let request = await axios.get(PATH);
     console.log(request.data);
-    this.setState({drinks: request.data});
+    this.setState({drinkResults: request.data.drinks}); 
   }catch(error){
     console.log("Mounting error - ", error);
   }
 }
-
-// getDrinks = async () => {
-
-//   try{
-//     let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-//     let request = await axios.get(PATH);
-//     this.setState({drinks: request.drinks})
-//   }catch(error){
-//     console.log("Mounting error - ", error);
-//   }
-// }
  
 
   render(){
@@ -61,7 +53,9 @@ componentDidMount = async ()=> {
         <Routes>
           <Route
             exact path="/"
-            element = {<Home/>}
+            element = {<Home
+            drinkResults={this.state.drinkResults}
+            />}
             >
             </Route>
 

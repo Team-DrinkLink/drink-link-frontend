@@ -25,40 +25,21 @@ class Home extends React.Component {
                         </Button>
                     </Form>
                 </Container>
+
+                  {this.props.drinkResults.length &&
+
                 <Container className='cardDisplay'>
-                  
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Header>Drink #1</Card.Header>
-                        <Card.Body>
-                            <Card.Img src="https://via.placeholder.com/150" />
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Header>Drink #1</Card.Header>
-                        <Card.Body>
-                            <Card.Img src="https://via.placeholder.com/150" />
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Header>Drink #1</Card.Header>
-                        <Card.Body>
-                            <Card.Img src="https://via.placeholder.com/150" />
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Header>Drink #1</Card.Header>
-                        <Card.Body>
-                            <Card.Img src="https://via.placeholder.com/150" />
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Header>Drink #1</Card.Header>
-                        <Card.Body>
-                            <Card.Img src="https://via.placeholder.com/150" />
-                        </Card.Body>
-                    </Card>
-                 
+
+                    {this.props.drinkResults.map((drink,index) =>{
+                        
+                        let newCard = <Card style={{ width: '18rem' }} key={index}> <Card.Header>{drink.strDrink}</Card.Header><Card.Body><Card.Img src={drink.strDrinkThumb}/></Card.Body></Card>
+
+                        return newCard
+                    
+                        })
+                    }
                 </Container>
+                    }
 
             </>
         )

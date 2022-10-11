@@ -21,47 +21,72 @@ class App extends React.Component{
       drinkResults: [],
       selectedDrink : {},
       userFavorites: [],
-      userLoggedIn: {},  
+      userLoggedIn: {},
+      showModal: false,   
 
     }
   }
 
-componentDidMount = async ()=> {
+componentDidMount() {
+  this.getDrinks()
+  // console.log(this.state.drinkResults)
+}
 
+getDrinks = async () => {
   //Sage: sets initial images to be margaritas until search changes the results
-
   try{
     // let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-    let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?+s=margarita`
+    let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
     let request = await axios.get(PATH);
     console.log(request.data);
-    this.setState({drinks: request.data});
+    this.setState({drinkResults: request.data.drinks}); 
   }catch(error){
     console.log("Mounting error - ", error);
   }
 }
-
-// getDrinks = async () => {
-
-//   try{
-//     let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-//     let request = await axios.get(PATH);
-//     this.setState({drinks: request.drinks})
-//   }catch(error){
-//     console.log("Mounting error - ", error);
-//   }
-// }
  
+
+//User create functions//////////
+handleUserCreate = async (newUserInfo) => {
+  console.log ('User Created is:', newUserInfo);
+  try {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}`, newUserInfo);
+      const createdUser = res.data;
+      console.log(res.data);
+      this.setState({
+          userLoggedIn: createdUser,
+      })
+  } catch (error) {
+      console.log("Error, there is a problem: ", error.response);
+  }
+}
+
+loginClick = (e) => {
+  e.preventDefault();
+  this.setState({showModal: true});
+}
+
+hideModal =() => {
+  this.setState({showModal: false});
+}
+
 
   render(){
     return(
       <>
       <Router>
-        <Header />
+        <Header 
+        loginClick={this.loginClick}
+        hideModal={this.hideModal}/>
         <Routes>
           <Route
             exact path="/"
-            element = {<Home/>}
+            element = {<Home
+            drinkResults={this.state.drinkResults}
+            handleUserCreate={this.handleUserCreate}
+            showModal={this.state.showModal}
+
+            />}
             >
             </Route>
 

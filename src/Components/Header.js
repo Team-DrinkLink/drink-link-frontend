@@ -1,4 +1,5 @@
 import React from "react";
+import "../Styles/App.scss";
 import { Navbar, NavItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthButtons from "./AuthButtons";
@@ -7,9 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class Header extends React.Component {
   render() {
     return (
+      
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand>Welcome to DrinkLink</Navbar.Brand>
 
+        <div className="NavItems">
         <NavItem>
           <Link to="/" className="nav-link" style={{ color: "white" }}>
             Home
@@ -21,7 +24,7 @@ class Header extends React.Component {
           </Link>
         </NavItem>
         <AuthButtons />
-
+        </div>
       </Navbar>
     );
   }

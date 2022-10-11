@@ -1,3 +1,7 @@
+body {
+    // background-image: 
+}
+
 .cardDisplay {
     display: flex;
     justify-content: center;
@@ -6,4 +10,31 @@
     .card{
         margin: 20px;
     }
+}
+
+.navbar-expand-lg.navbar-dark.bg-dark {
+    display: flex;
+    justify-content: space-around;
+}
+
+.NavItems {
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+    align-items: right;
+}
+
+.FilteredOptions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.form {
+    width: 30%;
+    margin: 45px;
+}
+
+.homeContainer {
+    display: flex;
+    justify-content: center;
 }

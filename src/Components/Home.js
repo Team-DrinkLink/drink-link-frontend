@@ -1,37 +1,37 @@
-import React from 'react';
-import {Form, Container, Button, Card} from 'react-bootstrap';
+
+import React from "react";
+import { Form, Container, Button, Card } from "react-bootstrap";
+import InputGroup from "react-bootstrap/InputGroup";
 import UserLoginModal from './UserLoginModal';
 
-
 class Home extends React.Component {
-
-
 
     render() {
         return (
             <>
-                <Container>
-                    <Form onSubmit={this.handleSubmit}>
-                        <Form.Group className="mb-3" controlId="mainSearch">
-                            <Form.Label>Search</Form.Label>
-                            <Form.Control type="text" placeholder="Drink" />
-                            <Form.Text className="text-muted"></Form.Text>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="searchbyingredient">
+              <Container className="homeContainer">
+                <Form className="form" onSubmit={this.handleSubmit}>
+                  <Form.Group className="mb-3" controlId="mainSearch">
+                    <InputGroup className="mb-3">
+                      <Button variant="primary" type="submit">
+                              Search
+                      </Button>
+                      <Form.Control type="text" placeholder="Drink" />
+                    </InputGroup>
+                          <Form.Text className="text-muted"></Form.Text>
+                      </Form.Group>
+                        <div className="FilteredOptions">
+                          <Form.Group controlId="searchbyingredient">
                             <Form.Check type="checkbox" label="search by ingredient" />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="non-alcoholic">
+                          </Form.Group>
+                          <Form.Group controlId="non-alcoholic">
                             <Form.Check type="checkbox" label="non-alcoholic" />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
-                    </Form>
-                </Container>
+                          </Form.Group>
+                        </div>
+                      </Form>
+              </Container>
 
                   {this.props.drinkResults.length &&
-
                 <Container className='cardDisplay'>
 
                     {this.props.drinkResults.map((drink,index) =>{
@@ -53,7 +53,6 @@ class Home extends React.Component {
 
             </>
         )
-
 
     }
 }

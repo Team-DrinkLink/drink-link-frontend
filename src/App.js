@@ -1,27 +1,22 @@
-import React from 'react';
-import axios from 'axios';
-import './Styles/App.scss'
-// import dotenv from 'dotenv'
-import Footer from './Components/Footer.js';
-import Header from './Components/Header.js';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-import Home from './Components/Home.js'
-import Drink from './Components/Drink.js';
-import Favorites from './Components/Favorites.js';
+import React from "react";
+import axios from "axios";
+import Footer from "./Components/Footer.js";
+import Header from "./Components/Header.js";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./Styles/App.css";
+import Home from "./Components/Home.js";
+import Drink from "./Components/Drink.js";
+import Favorites from "./Components/Favorites.js";
 
-
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       drinkResults: [],
-      selectedDrink : {},
+      selectedDrink: {},
       userFavorites: [],
       userLoggedIn: {},
+
       showModal: false,   
 
     }
@@ -70,9 +65,8 @@ hideModal =() => {
   this.setState({showModal: false});
 }
 
-
-  render(){
-    return(
+  render() {
+    return (
       <>
       <Router>
         <Header 
@@ -90,21 +84,12 @@ hideModal =() => {
             >
             </Route>
 
-            <Route
-            exact path ="/drink"
-            element={<Drink/>}
-            >
-            </Route>
+            <Route exact path="/drink" element={<Drink />}></Route>
 
-            <Route
-              exact path="/favorites"
-              element={<Favorites/>}
-              >
-              </Route>
-         </Routes>
-         <Footer />
-      </Router>
-      
+            <Route exact path="/favorites" element={<Favorites />}></Route>
+          </Routes>
+          <Footer />
+        </Router>
       </>
     );
   }

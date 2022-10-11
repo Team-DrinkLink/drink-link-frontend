@@ -20,7 +20,8 @@ class App extends React.Component{
       drinkResults: [],
       selectedDrink : {},
       userFavorites: [],
-      userLoggedIn: {},  
+      userLoggedIn: {},
+      showModal: false,   
 
     }
   }
@@ -39,19 +40,44 @@ try{
 }
 }
  
-// searchTerm = async (search) => {
-//   let FIND = `${process.env.REACT_APP_SERVER_API}s={}`
-// }
+//User create functions//////////
+handleUserCreate = async (newUserInfo) => {
+  console.log ('User Created is:', newUserInfo);
+  try {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}`, newUserInfo);
+      const createdUser = res.data;
+      console.log(res.data);
+      this.setState({
+          userLoggedIn: createdUser,
+      })
+  } catch (error) {
+      console.log("Error, there is a problem: ", error.response);
+  }
+}
+
+loginClick = (e) => {
+  e.preventDefault();
+  this.setState({showModal: true});
+}
+
+hideModal =() => {
+  this.setState({showModal: false});
+}
 
   render(){
     return(
       <>
       <Router>
-        <Header />
+        <Header 
+        loginClick={this.loginClick}
+        hideModal={this.hideModal}/>
         <Routes>
           <Route
             exact path="/"
-            element = {<Home/>}
+            element = {<Home
+            handleUserCreate={this.handleUserCreate}
+            showModal={this.state.showModal}
+            />}
             >
             </Route>
 

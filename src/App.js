@@ -22,7 +22,6 @@ class App extends React.Component{
   }
 
 componentDidMount = async ()=> {
-  console.log("hello")
   try{
     let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
     let request = await axios.get(PATH);
@@ -30,10 +29,6 @@ componentDidMount = async ()=> {
   }catch(error){
     console.log("Mounting error - ", error);
   }
-
-  // searchTerm = async (search) => {
-  //   let FIND = `${process.env.REACT_APP_SERVER_API}s={}`
-  // }
 }
 
 

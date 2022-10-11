@@ -1,0 +1,8 @@
+.cardDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardDisplay .card {
+  margin: 20px;
+}/*# sourceMappingURL=App.css.map */

@@ -27,7 +27,23 @@ class Drink extends React.Component {
                 </Card.Body>
                 <Card.Footer>Sample Ingredient</Card.Footer>
                 </Card>
+                <Card style={{ width: '8rem' }} className='mx-3 my-3'>
+                <Card.Body>
+                <Card.Img src="https://via.placeholder.com/150" />
+                </Card.Body>
+                <Card.Footer>Sample Ingredient</Card.Footer>
+                </Card>
+                <Card style={{ width: '8rem' }} className='mx-3 my-3'>
+                <Card.Body>
+                <Card.Img src="https://via.placeholder.com/150" />
+                </Card.Body>
+                <Card.Footer>Sample Ingredient</Card.Footer>
+                </Card>
 
+            </div>
+            <div>
+                <p> Instructions</p>
+                <p> Glass type</p>
             </div>
                 <Button onClick={() => this.props.handleFavoriteClick()}
                     variant="secondary" type="submit">

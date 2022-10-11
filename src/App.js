@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import Footer from './Components/Footer.js';
 import Header from './Components/Header.js';
 import {
@@ -18,27 +18,30 @@ class App extends React.Component{
     super(props);
     this.state = {
       drinkResults: [],
-      selectedDrink: {},
-      userFavorites: [], 
+      selectedDrink : {},
+      userFavorites: [],
+      userLoggedIn: {},  
 
     }
   }
 
 componentDidMount = async ()=> {
   console.log("hello")
-  // try{
-  //   let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-  //   let request = await axios.get(PATH);
-  //   this.setState({drinks: request.drinks})
-  // }catch(error){
-  //   console.log("Mounting error - ", error);
-  // }
-
-  // searchTerm = async (search) => {
-  //   let FIND = `${process.env.REACT_APP_SERVER_API}s={}`
-  // }
 }
+getDrinks = async () => {
 
+try{
+  let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
+  let request = await axios.get(PATH);
+  this.setState({drinks: request.drinks})
+}catch(error){
+  console.log("Mounting error - ", error);
+}
+}
+ 
+// searchTerm = async (search) => {
+//   let FIND = `${process.env.REACT_APP_SERVER_API}s={}`
+// }
 
   render(){
     return(

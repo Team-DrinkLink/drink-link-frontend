@@ -9,6 +9,7 @@ class Header extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand>Welcome to DrinkLink</Navbar.Brand>
+
         <NavItem>
           <Link to="/" className="nav-link" style={{ color: "white" }}>
             Home
@@ -20,6 +21,7 @@ class Header extends React.Component {
           </Link>
         </NavItem>
         <AuthButtons />
+
       </Navbar>
     );
   }

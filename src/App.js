@@ -17,7 +17,11 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      drinks: {},
+      drinkResults: [],
+      selectedDrink : {},
+      userFavorites: [],
+      userLoggedIn: {},  
+
     }
   }
 
@@ -30,7 +34,20 @@ componentDidMount = async ()=> {
     console.log("Mounting error - ", error);
   }
 }
+getDrinks = async () => {
 
+try{
+  let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
+  let request = await axios.get(PATH);
+  this.setState({drinks: request.drinks})
+}catch(error){
+  console.log("Mounting error - ", error);
+}
+}
+ 
+// searchTerm = async (search) => {
+//   let FIND = `${process.env.REACT_APP_SERVER_API}s={}`
+// }
 
   render(){
     return(

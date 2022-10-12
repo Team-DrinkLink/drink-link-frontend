@@ -16,26 +16,41 @@ class App extends React.Component {
       selectedDrink: {},
       userFavorites: [],
       userLoggedIn: {},
-      searchTerm: '',
+      searchTerm: "",
       ingredient: false,
-      // showModal: false,   
-    }
+    };
   }
 
-componentDidMount() {
-  this.getDrinks()
-  // console.log(this.state.drinkResults)
-}
+  componentDidMount() {
+    this.getDrinks();
+    // console.log(this.state.drinkResults)
+  }
 
-submitListener = (event)=> {
-  event.preventDefault();
-   let search = this.state.searchTerm === '' ? '': this.searchDrink(this.state.searchTerm);
-  return search;
-}
+  submitListener = (event) => {
+    event.preventDefault();
+    let search =
+      this.state.searchTerm === ""
+        ? ""
+        : this.searchDrink(this.state.searchTerm);
+    return search;
+  };
 
-searchTermChange = (event) => {
-  this.setState({searchTerm: event.target.value})
-}
+  searchTermChange = (event) => {
+    this.setState({ searchTerm: event.target.value });
+  };
+
+  getDrinks = async () => {
+    //Sage: sets initial images to be margaritas until search changes the results
+    try {
+      let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
+      // let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
+      let request = await axios.get(PATH);
+      // console.log(request.data);
+      this.setState({ drinkResults: request.data.drinks });
+    } catch (error) {
+      console.log("Mounting error - ", error);
+    }
+  };
 
 getDrinks = async () => {
   //Sage: sets initial images to be margaritas until search changes the results
@@ -125,7 +140,11 @@ setSelectedDrink = async (drinkClicked) => {
             setSelectedDrink={this.setSelectedDrink}
 npm start            />}></Route>
 
-            <Route exact path="/favorites" element={<Favorites />}></Route>
+            <Route
+              exact
+              path="/favorites"
+              element={<Favorites userFavorites={this.state.userFavorites} />}
+            ></Route>
           </Routes>
           <Footer />
         </Router>

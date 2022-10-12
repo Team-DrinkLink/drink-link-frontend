@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Footer from "./Components/Footer.js";
 import Header from "./Components/Header.js";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import "./Styles/App.css";
 import Home from "./Components/Home.js";
 import Drink from "./Components/Drink.js";
@@ -65,7 +65,7 @@ getDrinks = async () => {
 handleFavoriteClick = async (drinkInfo) => {
   console.log('drink to favorite is: ', drinkInfo);
   try {
-    const url = `${process.env.REACT_APP_SERVER}/model/user/${drinkInfo}`;
+    const url = `${process.env.REACT_APP_SERVER}/user/${drinkInfo}`;
     const drinkToFavorite = await axios.put(url, drinkInfo);
     const updatedFavoritesArray = this.state.userFavorites.map(existingDrink => {
       return existingDrink.idDrink === drinkInfo.idDrink ?  drinkToFavorite.data : existingDrink; 
@@ -80,10 +80,16 @@ handleFavoriteClick = async (drinkInfo) => {
 
 
 
-setSelectedDrink = (drinkClicked) => {
-  this.setState({selectedDrink: drinkClicked});
-  let navigate = useNavigate();
-  navigate('/drink');
+setSelectedDrink = async (drinkClicked) => {
+  try{
+    let PATH = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkClicked.idDrink}`
+    console.log(PATH);
+    let request = await axios.get(PATH);
+    console.log(request.data.drinks[0]);
+    this.setState({selectedDrink: request.data.drinks[0]}); 
+  }catch(error){
+    console.log("Mounting error - ", error);
+  }
 }
 
   render() {
@@ -107,6 +113,7 @@ setSelectedDrink = (drinkClicked) => {
             <Route exact path="/drink" element={<Drink 
             handleFavoriteClick={this.handleFavoriteClick}
             selectedDrink={this.state.selectedDrink}
+            setSelectedDrink={this.setSelectedDrink}
             />}></Route>
 
             <Route exact path="/favorites" element={<Favorites />}></Route>

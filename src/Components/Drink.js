@@ -9,7 +9,7 @@ class Drink extends React.Component {
         console.log(this.props.selectedDrink);
         return (
             <>
-                <Container>
+                <Container className='drinkToMake'>
                     <Card style={{ width: '18rem'}} className='mx-3 my-3'>
                         <Card.Header as='h1'>{this.props.selectedDrink.strDrink}</Card.Header>
                         <Card.Body>
@@ -123,16 +123,18 @@ class Drink extends React.Component {
 
 
                 </Container>
+
                 <div className='drinkinstructions'>
-                    <h2 style={{ color: "white" }}>Instructions</h2>
-                    <p style={{ color: "white" }}>{this.props.selectedDrink.strInstructions} </p>
-                    <h4 style={{ color: "white" }}>Glass type</h4>
-                    <p style={{ color: "white" }}>{this.props.selectedDrink.strGlass}</p>
-                </div>
+                    <h2>Instructions</h2>
+                    <p>{this.props.selectedDrink.strInstructions} </p>
+                    <h4>Glass type</h4>
+                    <p >{this.props.selectedDrink.strGlass}</p> 
+
                 <Button onClick={() => this.props.handleFavoriteClick()}
                     variant="secondary" type="submit">
                     add to Favorites
                 </Button>
+                </div>
             </>
         )
 

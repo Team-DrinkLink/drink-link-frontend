@@ -5,6 +5,7 @@ class Footer extends React.Component {
   render() {
     return (
       <Navbar
+        className="foot"
         fixed="bottom"
         collapseOnSelect
         expand="lg"

@@ -17,8 +17,8 @@ class App extends React.Component {
       userFavorites: [],
       userLoggedIn: {},
       searchTerm: '',
-      showModal: false,   
-
+      ingredient: false,
+      // showModal: false,   
     }
   }
 
@@ -41,25 +41,27 @@ getDrinks = async () => {
   //Sage: sets initial images to be margaritas until search changes the results
   try{
     let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-    // let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
     let request = await axios.get(PATH);
-    // console.log(request.data);
     this.setState({drinkResults: request.data.drinks}); 
+    
   }catch(error){
     console.log("Mounting error - ", error);
   }
 }
-<<<<<<< HEAD
-searchDrink = async (term) => {
-=======
 
- searchDrink = async (term) => {
->>>>>>> dc093806a70e10a6910e4492741fdeedbf0dc1d8
+searchDrink = async (term) => {
   try {
+    if(this.state.ingredient === true){
+      console.log("ingrediant")
+      let GRAB = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${term}`
+      let request = await axios.get(GRAB);
+      this.setState({drinkResults: request.data.drinks})
+    }else{
     let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`
     let request = await axios.get(GRAB);
-    console.log(request.data.drinks)
+    // console.log(request.data.drinks)
     this.setState({drinkResults: request.data.drinks})
+    }
   } catch (error) {
     console.log("searching error - ", error)
   }
@@ -82,16 +84,18 @@ handleFavoriteClick = async (drinkInfo) => {
   }
 }
 
-
+ingredientCheck = () =>{
+  this.setState({ingredient: !this.state.ingredient})
+}
 
 setSelectedDrink = (drinkClicked) => {
-  this.setState({selectedDrink: drinkClicked});
+  this.setState({selectedDrink: drinkClicked.idDrink});
   let navigate = useNavigate();
   navigate('/drink');
 }
 
   render() {
-    console.log(this.state.selectedDrink);
+    // console.log(this.state.selectedDrink);
     return (
       <>
       <Router>
@@ -104,6 +108,7 @@ setSelectedDrink = (drinkClicked) => {
             setSelectedDrink={this.setSelectedDrink}
             search={this.searchTermChange}
             submit ={this.submitListener}
+            inCheck ={() => this.ingredientCheck()}
             />}
             >
             </Route>

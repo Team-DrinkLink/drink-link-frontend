@@ -52,7 +52,7 @@ getDrinks = async () => {
 searchDrink = async (term) => {
   try {
     if(this.state.ingredient === true){
-      console.log("ingrediant")
+      console.log("ingredient")
       let GRAB = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${term}`
       let request = await axios.get(GRAB);
       this.setState({drinkResults: request.data.drinks})

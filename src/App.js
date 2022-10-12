@@ -16,7 +16,7 @@ class App extends React.Component {
       selectedDrink: {},
       userFavorites: [],
       userLoggedIn: {},
-
+      searchTerm: '',
       showModal: false,   
 
     }
@@ -27,19 +27,38 @@ componentDidMount() {
   // console.log(this.state.drinkResults)
 }
 
+submitListener = (event)=> {
+  event.preventDefault();
+   let search = this.state.searchTerm === '' ? '': this.searchDrink(this.state.searchTerm);
+  return search;
+}
+
+searchTermChange = (event) => {
+  this.setState({searchTerm: event.target.value})
+}
+
 getDrinks = async () => {
   //Sage: sets initial images to be margaritas until search changes the results
   try{
-    // let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-    let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
+    let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
+    // let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
     let request = await axios.get(PATH);
-    console.log(request.data);
+    // console.log(request.data);
     this.setState({drinkResults: request.data.drinks}); 
   }catch(error){
     console.log("Mounting error - ", error);
   }
 }
- 
+ searchDrink = async (term) => {
+  try {
+    let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`
+    let request = await axios.get(GRAB);
+    console.log(request.data.drinks)
+    this.setState({drinkResults: request.data.drinks})
+  } catch (error) {
+    console.log("searching error - ", error)
+  }
+ }
 
 //User create functions//////////
 handleUserCreate = async (newUserInfo) => {
@@ -79,7 +98,8 @@ hideModal =() => {
             drinkResults={this.state.drinkResults}
             handleUserCreate={this.handleUserCreate}
             showModal={this.state.showModal}
-
+            search={this.searchTermChange}
+            submit ={this.submitListener}
             />}
             >
             </Route>

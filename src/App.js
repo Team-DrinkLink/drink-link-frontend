@@ -123,7 +123,7 @@ setSelectedDrink = async (drinkClicked) => {
             handleFavoriteClick={this.handleFavoriteClick}
             selectedDrink={this.state.selectedDrink}
             setSelectedDrink={this.setSelectedDrink}
-            />}></Route>
+npm start            />}></Route>
 
             <Route exact path="/favorites" element={<Favorites />}></Route>
           </Routes>

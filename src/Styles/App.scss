@@ -1,5 +1,6 @@
 body {
-    // background-image: 
+    background-image: url("../assets/bar.jpg");
+    background-size: cover;
 }
 
 // .cardDisplay {
@@ -27,11 +28,15 @@ body {
 .FilteredOptions {
     display: flex;
     justify-content: space-around;
+    color: white;
 }
 
 .form {
     width: 30%;
     margin: 45px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color:#212529ad;
 }
 
 .homeContainer {

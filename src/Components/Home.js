@@ -2,7 +2,8 @@
 import React from "react";
 import { Form, Container, Button, Card } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
-import UserLoginModal from './UserLoginModal';
+import { Link } from "react-router-dom";
+
 
 class Home extends React.Component {
 
@@ -35,21 +36,25 @@ class Home extends React.Component {
                 <Container className='cardDisplay'>
 
                     {this.props.drinkResults.map((drink,index) =>{
+                      
+                        let newCard = <Card style={{ width: '18rem' }} key={index} onClick={() => this.props.setSelectedDrink(drink)}> <Card.Header>{drink.strDrink}</Card.Header><Card.Body>
+                        <Link to='/drink'>
+                        <Card.Img src={drink.strDrinkThumb}/>
+                        </Link>
+                            </Card.Body>
+                            </Card>
                         
-                        let newCard = <Card style={{ width: '18rem' }} key={index}> <Card.Header>{drink.strDrink}</Card.Header><Card.Body><Card.Img src={drink.strDrinkThumb}/></Card.Body></Card>
-
                         return newCard
-                    
+                        
                         })
                     }
                 </Container>
-
                     }
-                <UserLoginModal
+                {/* <UserLoginModal
                     showModal={this.props.showModal}
                     hideModal={this.props.hideModal}
                     handleUserCreate={this.handleUserCreate}
-                    />
+                    /> */}
 
             </>
         )

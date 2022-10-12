@@ -16,7 +16,7 @@ class UserLoginModal extends React.Component {
     render() {
         return (
             <>
-            <Modal 
+            {/* <Modal 
             show={this.props.showModal}
             onHide={this.props.hideModal} 
             centered 
@@ -47,7 +47,7 @@ class UserLoginModal extends React.Component {
                     </Button>
                 </Form>
             </Modal.Body>
-            </Modal>
+            </Modal> */}
             </>
 
         )

@@ -8,13 +8,14 @@ class Home extends React.Component {
     return (
       <>
         <Container className="homeContainer">
-          <Form className="form" onSubmit={this.handleSubmit}>
+
+          <Form className="form" onSubmit={this.props.submit}>
             <Form.Group className="mb-3" controlId="mainSearch">
               <InputGroup className="mb-3">
-                <Button variant="danger" type="submit">
+                <Button variant="primary" type="submit">
                   Search
                 </Button>
-                <Form.Control type="text" placeholder="Drink" variant="dark" />
+                <Form.Control type="text" placeholder="Drink" onChange={this.props.search}/>
               </InputGroup>
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>

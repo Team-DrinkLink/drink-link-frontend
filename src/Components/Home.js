@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Form, Container, Button, Card } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -11,13 +10,13 @@ class Home extends React.Component {
         return (
             <>
               <Container className="homeContainer">
-                <Form className="form" onSubmit={this.handleSubmit}>
+                <Form className="form" onSubmit={this.props.submit}>
                   <Form.Group className="mb-3" controlId="mainSearch">
                     <InputGroup className="mb-3">
                       <Button variant="primary" type="submit">
                               Search
                       </Button>
-                      <Form.Control type="text" placeholder="Drink" />
+                      <Form.Control type="text" placeholder="Drink" onChange={this.props.search}/>
                     </InputGroup>
                           <Form.Text className="text-muted"></Form.Text>
                       </Form.Group>
@@ -50,16 +49,12 @@ class Home extends React.Component {
                     }
                 </Container>
                     }
-                {/* <UserLoginModal
-                    showModal={this.props.showModal}
-                    hideModal={this.props.hideModal}
-                    handleUserCreate={this.handleUserCreate}
-                    /> */}
 
             </>
         )
 
     }
+
 }
 
 export default Home;

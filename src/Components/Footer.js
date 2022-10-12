@@ -12,7 +12,7 @@ class Footer extends React.Component {
         variant="dark"
       >
         <Navbar.Brand>
-          Team DrinkLink &copy; 2022 Sage+Megan+Diego+Matthew
+          Team DrinkLink &copy; 2022 Sage Megan Diego Matthew
         </Navbar.Brand>
       </Navbar>
     );

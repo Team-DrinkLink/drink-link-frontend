@@ -49,7 +49,7 @@ getDrinks = async () => {
     console.log("Mounting error - ", error);
   }
 }
- searchDrink = async (term) => {
+searchDrink = async (term) => {
   try {
     let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`
     let request = await axios.get(GRAB);
@@ -58,7 +58,7 @@ getDrinks = async () => {
   } catch (error) {
     console.log("searching error - ", error)
   }
- }
+}
 
 //User create functions//////////
 handleUserCreate = async (newUserInfo) => {

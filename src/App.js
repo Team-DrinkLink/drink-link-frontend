@@ -39,19 +39,6 @@ class App extends React.Component {
     this.setState({ searchTerm: event.target.value });
   };
 
-  getDrinks = async () => {
-    //Sage: sets initial images to be margaritas until search changes the results
-    try {
-      let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-      // let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
-      let request = await axios.get(PATH);
-      // console.log(request.data);
-      this.setState({ drinkResults: request.data.drinks });
-    } catch (error) {
-      console.log("Mounting error - ", error);
-    }
-  };
-
 getDrinks = async () => {
   //Sage: sets initial images to be margaritas until search changes the results
   try{

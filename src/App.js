@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Footer from "./Components/Footer.js";
 import Header from "./Components/Header.js";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import "./Styles/App.css";
 import Home from "./Components/Home.js";
 import Drink from "./Components/Drink.js";
@@ -49,7 +49,12 @@ getDrinks = async () => {
     console.log("Mounting error - ", error);
   }
 }
+<<<<<<< HEAD
 searchDrink = async (term) => {
+=======
+
+ searchDrink = async (term) => {
+>>>>>>> dc093806a70e10a6910e4492741fdeedbf0dc1d8
   try {
     let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`
     let request = await axios.get(GRAB);
@@ -60,51 +65,53 @@ searchDrink = async (term) => {
   }
 }
 
-//User create functions//////////
-handleUserCreate = async (newUserInfo) => {
-  console.log ('User Created is:', newUserInfo);
+
+handleFavoriteClick = async (drinkInfo) => {
+  console.log('drink to favorite is: ', drinkInfo);
   try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER}`, newUserInfo);
-      const createdUser = res.data;
-      console.log(res.data);
-      this.setState({
-          userLoggedIn: createdUser,
-      })
+    const url = `${process.env.REACT_APP_SERVER}/model/user/${drinkInfo}`;
+    const drinkToFavorite = await axios.put(url, drinkInfo);
+    const updatedFavoritesArray = this.state.userFavorites.map(existingDrink => {
+      return existingDrink.idDrink === drinkInfo.idDrink ?  drinkToFavorite.data : existingDrink; 
+    });
+    this.setState({
+      userFavorites: updatedFavoritesArray
+    })
   } catch (error) {
-      console.log("Error, there is a problem: ", error.response);
+    console.log('error updating user favorites: ', error.response);
   }
 }
 
-loginClick = (e) => {
-  e.preventDefault();
-  this.setState({showModal: true});
-}
 
-hideModal =() => {
-  this.setState({showModal: false});
+
+setSelectedDrink = (drinkClicked) => {
+  this.setState({selectedDrink: drinkClicked});
+  let navigate = useNavigate();
+  navigate('/drink');
 }
 
   render() {
+    console.log(this.state.selectedDrink);
     return (
       <>
       <Router>
-        <Header 
-        loginClick={this.loginClick}
-        hideModal={this.hideModal}/>
+        <Header/>
         <Routes>
           <Route
             exact path="/"
             element = {<Home
             drinkResults={this.state.drinkResults}
-            handleUserCreate={this.handleUserCreate}
-            showModal={this.state.showModal}
+            setSelectedDrink={this.setSelectedDrink}
             search={this.searchTermChange}
             submit ={this.submitListener}
             />}
             >
             </Route>
 
-            <Route exact path="/drink" element={<Drink />}></Route>
+            <Route exact path="/drink" element={<Drink 
+            handleFavoriteClick={this.handleFavoriteClick}
+            selectedDrink={this.state.selectedDrink}
+            />}></Route>
 
             <Route exact path="/favorites" element={<Favorites />}></Route>
           </Routes>

@@ -36,12 +36,14 @@ class Home extends React.Component {
 
                     {this.props.drinkResults.map((drink,index) =>{
                       
-                        let newCard = <Card style={{ width: '18rem' }} key={index} onClick={() => this.props.setSelectedDrink(drink)}> <Card.Header>{drink.strDrink}</Card.Header><Card.Body>
+                        let newCard = <Card style={{ width: '18rem' }} key={index} onClick={() => this.props.setSelectedDrink(drink)}> 
+                        <Card.Header>{drink.strDrink}</Card.Header>
                         <Link to='/drink'>
+                        <Card.Body>
                         <Card.Img src={drink.strDrinkThumb}/>
+                        </Card.Body>
                         </Link>
-                            </Card.Body>
-                            </Card>
+                        </Card>
                         
                         return newCard
                         

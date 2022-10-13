@@ -2,12 +2,7 @@ import React from "react";
 import axios from "axios";
 import Footer from "./Components/Footer.js";
 import Header from "./Components/Header.js";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import "./Styles/App.css";
 import { withAuth0 } from "@auth0/auth0-react";
 import Home from "./Components/Home.js";
@@ -23,14 +18,13 @@ class App extends React.Component {
       userFavorites: [],
       userLoggedIn: {},
       searchTerm: "",
-      showModal: false,
     };
   }
 
   componentDidMount() {
-    this.getDrinks();
-    
+    this.getDrinks(); 
   }
+  
   componentDidUpdate() {}
 
   submitListener = (event) => {
@@ -125,55 +119,6 @@ class App extends React.Component {
     }
   };
 
-  getDrinks = async () => {
-    //Sage: sets initial images to be margaritas until search changes the results
-    try {
-      let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-      // let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
-      let request = await axios.get(PATH);
-      // console.log(request.data);
-      this.setState({ drinkResults: request.data.drinks });
-    } catch (error) {
-      console.log("Mounting error - ", error);
-    }
-  };
-
-  searchDrink = async (term) => {
-    try {
-      let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`;
-      let request = await axios.get(GRAB);
-      console.log(request.data.drinks);
-      this.setState({ drinkResults: request.data.drinks });
-    } catch (error) {
-      console.log("searching error - ", error);
-    }
-  };
-
-  handleFavoriteClick = async (drinkInfo) => {
-    console.log("drink to favorite is: ", drinkInfo);
-    try {
-      const url = `${process.env.REACT_APP_SERVER}/model/user/${drinkInfo}`;
-      const drinkToFavorite = await axios.put(url, drinkInfo);
-      const updatedFavoritesArray = this.state.userFavorites.map(
-        (existingDrink) => {
-          return existingDrink.idDrink === drinkInfo.idDrink
-            ? drinkToFavorite.data
-            : existingDrink;
-        }
-      );
-      this.setState({
-        userFavorites: updatedFavoritesArray,
-      });
-    } catch (error) {
-      console.log("error updating user favorites: ", error.response);
-    }
-  };
-
-  setSelectedDrink = (drinkClicked) => {
-    this.setState({ selectedDrink: drinkClicked });
-    let navigate = useNavigate();
-    navigate("/drink");
-  };
 
   render() {
     this.findOrCreateUser();
@@ -197,35 +142,32 @@ class App extends React.Component {
             add
           </button>
           {this.props.auth0.isAuthenticated && (
-            <Routes>
-              <Route
-                exact
-                path="/"
-                element={
-                  <Home
-                    drinkResults={this.state.drinkResults}
-                    setSelectedDrink={this.setSelectedDrink}
-                    search={this.searchTermChange}
-                    submit={this.submitListener}
-                  />
-                }
-              ></Route>
+          <Routes>
+          <Route
+            exact path="/"
+            element = {<Home
+            drinkResults={this.state.drinkResults}
+            setSelectedDrink={this.setSelectedDrink}
+            search={this.searchTermChange}
+            submit ={this.submitListener}
+            inCheck ={() => this.ingredientCheck()}
+            />}
+            >
+            </Route>
 
-              <Route
-                exact
-                path="/drink"
-                element={
-                  <Drink
-                    handleFavoriteClick={this.handleFavoriteClick}
-                    selectedDrink={this.state.selectedDrink}
-                  />
-                }
-              ></Route>
+            <Route exact path="/drink" element={<Drink 
+            handleFavoriteClick={this.handleFavoriteClick}
+            selectedDrink={this.state.selectedDrink}
+            setSelectedDrink={this.setSelectedDrink}
+            />}></Route>
 
-              <Route exact path="/favorites" element={<Favorites />}></Route>
-            </Routes>
+            <Route
+              exact
+              path="/favorites"
+              element={<Favorites userFavorites={this.state.userFavorites} />}
+            ></Route>
+          </Routes>
           )}
-
           <Footer />
         </Router>
       </>

@@ -1,22 +1,20 @@
+@import './variables.scss';
+
 body {
-    background-image: url("../assets/bar.jpg");
+    background-image: linear-gradient(rgba(105, 98, 109, 0.26)
+    , rgba(105, 98, 109, 0.26)
+    ), url("../assets/bar.jpg");
     background-size: cover;
+    padding-bottom: 100px;
 }
 
-// .cardDisplay {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-    
-//     .card{
-//         margin: 20px;
-//     }
-// }
 
 .navbar-expand-lg.navbar-dark.bg-dark {
     display: flex;
     justify-content: space-around;
+    
 }
+
 
 .NavItems {
     display: flex;
@@ -43,3 +41,4 @@ body {
     display: flex;
     justify-content: center;
 }
+

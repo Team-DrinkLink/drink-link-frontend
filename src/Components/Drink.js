@@ -130,7 +130,7 @@ class Drink extends React.Component {
                     <h4>Glass type</h4>
                     <p >{this.props.selectedDrink.strGlass}</p> 
 
-                <Button onClick={() => this.props.handleFavoriteClick()}
+                <Button onClick={() => this.props.addCocktailToFavorite()}
                     variant="secondary" type="submit" className='favorite'>
                     add to Favorites
                 </Button>

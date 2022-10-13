@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Card } from "react-bootstrap";
+import { Container, Card, Button} from "react-bootstrap";
 
 class Favorites extends React.Component {
   render() {
@@ -15,6 +15,10 @@ class Favorites extends React.Component {
                   <Card.Body>
                     <Card.Img src={drink.strDrinkThumb} />
                   </Card.Body>
+                  <Button onClick={() => this.props.deleteFavoriteCockTail()}
+                    variant="secondary" type="submit" className='favorite'>
+                    Delete from Favorites
+                </Button>
                 </Card>
               );
 

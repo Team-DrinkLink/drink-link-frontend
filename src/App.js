@@ -92,12 +92,13 @@ searchDrink = async (term) => {
         url: "/user",
       };
       const userData = await axios(config);
-      console.log("user", userData.data);
+      console.log("drink", userData.data);
+
     }
   };
 
   addCocktailToFavorite = async (cocktail) => {
-    console.log(this.selectedDrink);
+    console.log(cocktail);
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw;
@@ -111,12 +112,14 @@ searchDrink = async (term) => {
         },
       };
       const drinkData = await axios(config);
-      console.log("success", drinkData.data);
+      console.log("success", cocktail);
+      console.log("drink", drinkData.data);
     }
   };
 
   getFavoriteCocktails = async () => {
-    if (this.props.auth0.isAuthenticated) {
+    try {
+      if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw;
       const config = {
@@ -126,8 +129,11 @@ searchDrink = async (term) => {
         url: "/user/favorite",
       };
       const drinkData = await axios(config);
-      console.log("success", drinkData.data);
+      this.setState({userFavorites: drinkData.data})
     }
+  } catch (error) {
+    console.log(error)
+  }
   };
 
   deleteFavoriteCockTail = async (id) => {
@@ -141,6 +147,7 @@ searchDrink = async (term) => {
         url: `/drink/favorite/${id}`,
       };
       const drinkData = await axios(config);
+      this.getFavoriteCocktails()
       console.log("success", drinkData.data);
     }
   };
@@ -169,11 +176,17 @@ alcCheckHandler = () =>{
   setSelectedDrink = async (drinkClicked) => {
     try{
       let PATH = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkClicked.idDrink}`
-      console.log(PATH);
+      let request = await axios.get(PATH);
+      this.setState({selectedDrink: request.data.drinks[0]}); 
+    } catch(error){
+      console.log("Mounting error - ", error);
+    }
+    try{
+      let PATH = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkClicked.id}`
       let request = await axios.get(PATH);
       console.log(request.data.drinks[0]);
       this.setState({selectedDrink: request.data.drinks[0]}); 
-    }catch(error){
+    } catch(error){
       console.log("Mounting error - ", error);
     }
   }
@@ -185,20 +198,6 @@ alcCheckHandler = () =>{
       <>
         <Router>
           <Header />
-          <button onClick={()=>this.deleteFavoriteCockTail("6347512ed960f935d19bc306")}>Delete</button>
-          <button onClick={this.getFavoriteCocktails}>Get favorites</button>
-          <button
-            onClick={() =>
-              this.addCocktailToFavorite({
-                title: "Margarita",
-                id: "12121213",
-                image:
-                  "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg",
-              })
-            }
-          >
-            add
-          </button>
           {this.props.auth0.isAuthenticated && (
           <Routes>
           <Route
@@ -228,7 +227,9 @@ alcCheckHandler = () =>{
               element={<Favorites 
                 userFavorites={this.state.userFavorites}
                 drinkResults={this.state.drinkResults}
+                getFavoriteCocktails={this.getFavoriteCocktails}
                 deleteFavoriteCockTail={this.deleteFavoriteCockTail}
+                setSelectedDrink={this.setSelectedDrink}
                  />}
             ></Route>
           </Routes>

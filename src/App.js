@@ -18,14 +18,13 @@ class App extends React.Component {
       userFavorites: [],
       userLoggedIn: {},
       searchTerm: "",
+      ingredient: false,
     };
   }
 
   componentDidMount() {
     this.getDrinks(); 
   }
-  
-  componentDidUpdate() {}
 
   submitListener = (event) => {
     event.preventDefault();
@@ -119,6 +118,52 @@ class App extends React.Component {
     }
   };
 
+  getDrinks = async () => {
+    //Sage: sets initial images to be margaritas until search changes the results
+    try{
+      let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
+      let request = await axios.get(PATH);
+      this.setState({drinkResults: request.data.drinks}); 
+      
+    }catch(error){
+      console.log("Mounting error - ", error);
+    }
+  }
+  
+  searchDrink = async (term) => {
+    try {
+      if(this.state.ingredient === true){
+        console.log("ingredient")
+        let GRAB = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${term}`
+        let request = await axios.get(GRAB);
+        this.setState({drinkResults: request.data.drinks})
+      }else{
+      let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`
+      let request = await axios.get(GRAB);
+      // console.log(request.data.drinks)
+      this.setState({drinkResults: request.data.drinks})
+      }
+    } catch (error) {
+      console.log("searching error - ", error)
+    }
+  }
+
+  ingredientCheck = () =>{
+    this.setState({ingredient: !this.state.ingredient})
+  }
+  
+  setSelectedDrink = async (drinkClicked) => {
+    try{
+      let PATH = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkClicked.idDrink}`
+      console.log(PATH);
+      let request = await axios.get(PATH);
+      console.log(request.data.drinks[0]);
+      this.setState({selectedDrink: request.data.drinks[0]}); 
+    }catch(error){
+      console.log("Mounting error - ", error);
+    }
+  }
+  
 
   render() {
     this.findOrCreateUser();
@@ -126,7 +171,6 @@ class App extends React.Component {
       <>
         <Router>
           <Header />
-          <button onClick={this.findOrCreateUser}>findOrCreateUser</button>
           <button onClick={()=>this.deleteFavoriteCockTail("6347512ed960f935d19bc306")}>Delete</button>
           <button onClick={this.getFavoriteCocktails}>Get favorites</button>
           <button

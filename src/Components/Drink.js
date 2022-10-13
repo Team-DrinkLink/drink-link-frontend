@@ -14,7 +14,8 @@ class Drink extends React.Component {
                         <Card.Body>
                             <Card.Img src={this.props.selectedDrink.strDrinkThumb} />
                         </Card.Body>
-                        <Card.Footer>{this.props.selectedDrink.strIBA}</Card.Footer>
+
+                        {this.props.selectedDrink.strIBA && <Card.Footer>{this.props.selectedDrink.strIBA}</Card.Footer>}
                     </Card>
                 </Container>
 
@@ -129,8 +130,8 @@ class Drink extends React.Component {
                     <h4>Glass type</h4>
                     <p >{this.props.selectedDrink.strGlass}</p> 
 
-                <Button onClick={() => this.props.addCocktailToFavorite()}
-                    variant="secondary" type="submit">
+                <Button onClick={() => this.props.handleFavoriteClick()}
+                    variant="secondary" type="submit" className='favorite'>
                     add to Favorites
                 </Button>
                 </div>

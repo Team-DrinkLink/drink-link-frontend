@@ -1,12 +1,13 @@
 @import './variables.scss';
 
 .card {
-    background-color: rgb(225, 221, 221);
+    // background-color: rgb(225, 221, 221);
+    color: white;
+    background-color: #a07263;
+    border: 5px solid #6f4c409a;
     height: auto;
     .card-header{
-        transition-property: font-size;
-        transition-duration: 300ms;
-        // transition-delay: 100ms;
+        background-color: #69463b;
         font-size: 20px;
         text-align: center;
     }
@@ -34,7 +35,13 @@
     p{
         margin: 10px;
     }
-    button{
+    .favorite{
+        background-color: #caa40d;
+        border: solid #caa40d;
         margin: 10px;
     }
+}
+.btn{
+    background-color: #A51833;
+    border: solid #A51833;
 }

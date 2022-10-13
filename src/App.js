@@ -59,6 +59,9 @@ searchDrink = async (term) => {
     let request = await axios.get(GRAB);
     // console.log(request.data.drinks)
     this.setState({drinkResults: request.data.drinks})
+    } 
+    }catch (error) {
+      console.log("searching error - ", error)
     }
     }
 
@@ -222,7 +225,11 @@ alcCheckHandler = () =>{
             <Route
               exact
               path="/favorites"
-              element={<Favorites userFavorites={this.state.userFavorites} />}
+              element={<Favorites 
+                userFavorites={this.state.userFavorites}
+                drinkResults={this.state.drinkResults}
+                deleteFavoriteCockTail={this.deleteFavoriteCockTail}
+                 />}
             ></Route>
           </Routes>
           )}

@@ -11,6 +11,13 @@
         font-size: 20px;
         text-align: center;
     }
+
+    .card-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
 }
 
 .drinkToMake{

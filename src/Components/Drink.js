@@ -53,11 +53,11 @@ class Drink extends React.Component {
                         <Card style={{ width: '15rem', height: '22rem' }} className='mx-3 my-3'>
                             <Card.Header as='h3'>{this.props.selectedDrink.strIngredient3}</Card.Header>
                             <Card.Img src={`https://www.thecocktaildb.com/images/ingredients/${this.props.selectedDrink.strIngredient3}-medium.png`}/>
-                            <Card.Body>
+                            <Card.Body> 
                             </Card.Body>
                             <Card.Footer as='h4'>{this.props.selectedDrink.strMeasure3}</Card.Footer>
                         </Card>
-                    }
+                    }   
 
                     {this.props.selectedDrink.strIngredient4 &&
                         <Card style={{ width: '15rem', height: '22rem' }} className='mx-3 my-3'>

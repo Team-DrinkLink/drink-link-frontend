@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
+// import './Styles/App.scss';
+// import './Styles/Cardstyle.scss'
 import Footer from "./Components/Footer.js";
 import Header from "./Components/Header.js";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import "./Styles/App.css";
 import { withAuth0 } from "@auth0/auth0-react";
 import Home from "./Components/Home.js";
 import Drink from "./Components/Drink.js";
 import Favorites from "./Components/Favorites.js";
+import Login from "./Components/Login.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -198,7 +200,7 @@ alcCheckHandler = () =>{
       <>
         <Router>
           <Header />
-          {this.props.auth0.isAuthenticated && (
+          {this.props.auth0.isAuthenticated ? (
           <Routes>
           <Route
             exact path="/"
@@ -233,7 +235,13 @@ alcCheckHandler = () =>{
                  />}
             ></Route>
           </Routes>
-          )}
+          ) :
+          <> 
+          <div className="openingMessage">
+          <h1>Please log in</h1>
+              <Login></Login>
+          </div>
+          </>}
           <Footer />
         </Router>
       </>

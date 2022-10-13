@@ -19,6 +19,7 @@ class App extends React.Component {
       userLoggedIn: {},
       searchTerm: "",
       ingredient: false,
+      alcoholic: true,
     };
   }
 
@@ -30,7 +31,7 @@ class App extends React.Component {
     event.preventDefault();
     let search =
       this.state.searchTerm === ""
-        ? ""
+        ? <p>Oh no looks like you spilled</p>
         : this.searchDrink(this.state.searchTerm);
     return search;
   };
@@ -38,6 +39,28 @@ class App extends React.Component {
   searchTermChange = (event) => {
     this.setState({ searchTerm: event.target.value });
   };
+
+ 
+
+searchDrink = async (term) => {
+  try {
+    if(this.state.ingredient === true){
+      let GRAB = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${term}`
+      let request = await axios.get(GRAB);
+      this.setState({drinkResults: request.data.drinks});
+    }else if(this.state.alcoholic === false){
+      let PATH = `${process.env.REACT_APP_SERVER_API}s=${term}`;
+      let request = await axios.get(PATH);
+      // console.log(request.data.drinks);
+      let filtered = request.data.drinks.filter(value => value.strAlcoholic === "Non alcoholic")
+      this.setState({drinkResults: filtered});
+    }else{
+    let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`
+    let request = await axios.get(GRAB);
+    // console.log(request.data.drinks)
+    this.setState({drinkResults: request.data.drinks})
+    }
+    }
 
   getDrinkFromBackend = async () => {
     if (this.props.auth0.isAuthenticated) {
@@ -130,28 +153,15 @@ class App extends React.Component {
     }
   }
   
-  searchDrink = async (term) => {
-    try {
-      if(this.state.ingredient === true){
-        console.log("ingredient")
-        let GRAB = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${term}`
-        let request = await axios.get(GRAB);
-        this.setState({drinkResults: request.data.drinks})
-      }else{
-      let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`
-      let request = await axios.get(GRAB);
-      // console.log(request.data.drinks)
-      this.setState({drinkResults: request.data.drinks})
-      }
-    } catch (error) {
-      console.log("searching error - ", error)
-    }
-  }
 
-  ingredientCheck = () =>{
-    this.setState({ingredient: !this.state.ingredient})
-  }
-  
+ingredientCheck = () =>{
+  this.setState({ingredient: !this.state.ingredient})
+}
+
+alcCheckHandler = () =>{
+  this.setState({alcoholic: !this.state.alcoholic})
+}
+
   setSelectedDrink = async (drinkClicked) => {
     try{
       let PATH = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkClicked.idDrink}`
@@ -195,6 +205,7 @@ class App extends React.Component {
             search={this.searchTermChange}
             submit ={this.submitListener}
             inCheck ={() => this.ingredientCheck()}
+            alcCheck ={() => this.alcCheckHandler()}
             />}
             >
             </Route>
@@ -203,7 +214,8 @@ class App extends React.Component {
             handleFavoriteClick={this.handleFavoriteClick}
             selectedDrink={this.state.selectedDrink}
             setSelectedDrink={this.setSelectedDrink}
-            />}></Route>
+           />}></Route>
+
 
             <Route
               exact

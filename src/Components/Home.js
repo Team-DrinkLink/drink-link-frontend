@@ -26,7 +26,7 @@ class Home extends React.Component {
                             <Form.Check type="checkbox" label="search by ingredient" onChange={this.props.inCheck}/>
                           </Form.Group>
                           <Form.Group controlId="non-alcoholic">
-                            <Form.Check type="checkbox" label="non-alcoholic" />
+                            <Form.Check type="checkbox" label="non-alcoholic" onChange={this.props.alcCheck} />
                           </Form.Group>
                         </div>
                       </Form>

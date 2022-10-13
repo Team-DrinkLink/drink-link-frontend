@@ -18,6 +18,7 @@ class App extends React.Component {
       userLoggedIn: {},
       searchTerm: "",
       ingredient: false,
+      alcoholic: true,
     };
   }
 
@@ -30,7 +31,7 @@ class App extends React.Component {
     event.preventDefault();
     let search =
       this.state.searchTerm === ""
-        ? ""
+        ? <p>Oh no looks like you spilled</p>
         : this.searchDrink(this.state.searchTerm);
     return search;
   };
@@ -39,18 +40,7 @@ class App extends React.Component {
     this.setState({ searchTerm: event.target.value });
   };
 
-  getDrinks = async () => {
-    //Sage: sets initial images to be margaritas until search changes the results
-    try {
-      let PATH = `${process.env.REACT_APP_SERVER_API}s=margarita`;
-      // let PATH = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`
-      let request = await axios.get(PATH);
-      // console.log(request.data);
-      this.setState({ drinkResults: request.data.drinks });
-    } catch (error) {
-      console.log("Mounting error - ", error);
-    }
-  };
+ 
 
 getDrinks = async () => {
   //Sage: sets initial images to be margaritas until search changes the results
@@ -67,10 +57,15 @@ getDrinks = async () => {
 searchDrink = async (term) => {
   try {
     if(this.state.ingredient === true){
-      console.log("ingredient")
       let GRAB = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${term}`
       let request = await axios.get(GRAB);
-      this.setState({drinkResults: request.data.drinks})
+      this.setState({drinkResults: request.data.drinks});
+    }else if(this.state.alcoholic === false){
+      let PATH = `${process.env.REACT_APP_SERVER_API}s=${term}`;
+      let request = await axios.get(PATH);
+      // console.log(request.data.drinks);
+      let filtered = request.data.drinks.filter(value => value.strAlcoholic === "Non alcoholic")
+      this.setState({drinkResults: filtered});
     }else{
     let GRAB = `${process.env.REACT_APP_SERVER_API}s=${term}`
     let request = await axios.get(GRAB);
@@ -103,6 +98,10 @@ ingredientCheck = () =>{
   this.setState({ingredient: !this.state.ingredient})
 }
 
+alcCheckHandler = () =>{
+  this.setState({alcoholic: !this.state.alcoholic})
+}
+
 setSelectedDrink = async (drinkClicked) => {
   try{
     let PATH = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkClicked.idDrink}`
@@ -130,6 +129,7 @@ setSelectedDrink = async (drinkClicked) => {
             search={this.searchTermChange}
             submit ={this.submitListener}
             inCheck ={() => this.ingredientCheck()}
+            alcCheck ={() => this.alcCheckHandler()}
             />}
             >
             </Route>
@@ -138,7 +138,7 @@ setSelectedDrink = async (drinkClicked) => {
             handleFavoriteClick={this.handleFavoriteClick}
             selectedDrink={this.state.selectedDrink}
             setSelectedDrink={this.setSelectedDrink}
-npm start            />}></Route>
+           />}></Route>
 
             <Route
               exact

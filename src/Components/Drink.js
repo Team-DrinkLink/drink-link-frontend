@@ -5,7 +5,15 @@ import '../Styles/Cardstyle.scss'
 
 
 class Drink extends React.Component {
+    
+
+
     render() {
+        let title = this.props.selectedDrink.strDrink;
+        let id = this.props.selectedDrink.idDrink;
+        let image = this.props.selectedDrink.strDrinkThumb;
+    
+
         return (
             <>
                 <Container className='drinkToMake'>
@@ -123,6 +131,8 @@ class Drink extends React.Component {
 
 
                 </Container>
+                
+               
 
                 <div className='drinkinstructions'>
                     <h2>Instructions</h2>
@@ -130,7 +140,9 @@ class Drink extends React.Component {
                     <h4>Glass type</h4>
                     <p >{this.props.selectedDrink.strGlass}</p> 
 
-                <Button onClick={() => this.props.addCocktailToFavorite()}
+               
+
+                <Button onClick={() => this.props.addCocktailToFavorite({title: title, id: id, image: image})}
                     variant="secondary" type="submit" className='favorite'>
                     add to Favorites
                 </Button>

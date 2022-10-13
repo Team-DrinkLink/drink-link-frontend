@@ -94,6 +94,7 @@ searchDrink = async (term) => {
   };
 
   addCocktailToFavorite = async (cocktail) => {
+    console.log(this.selectedDrink);
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw;
@@ -214,7 +215,8 @@ alcCheckHandler = () =>{
             handleFavoriteClick={this.handleFavoriteClick}
             selectedDrink={this.state.selectedDrink}
             setSelectedDrink={this.setSelectedDrink}
-           />}></Route>
+            addCocktailToFavorite={this.addCocktailToFavorite}
+            />}></Route>
 
 
             <Route

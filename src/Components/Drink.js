@@ -6,7 +6,6 @@ import '../Styles/Cardstyle.scss'
 
 class Drink extends React.Component {
     render() {
-        console.log(this.props.selectedDrink);
         return (
             <>
                 <Container className='drinkToMake'>

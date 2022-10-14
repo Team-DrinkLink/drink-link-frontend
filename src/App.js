@@ -12,6 +12,7 @@ import Favorites from "./Components/Favorites.js";
 import Login from "./Components/Login.js";
 import { Toast } from "react-bootstrap";
 import ToastContainer from "react-bootstrap/ToastContainer";
+import WelcomePage from "./Components/WelcomePage.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -116,24 +117,6 @@ class App extends React.Component {
     }
   };
 
-  findOrCreateUser = async () => {
-    if (this.props.auth0.isAuthenticated) {
-      const res = await this.props.auth0.getIdTokenClaims();
-      const jwt = res.__raw;
-      const config = {
-        headers: { Authorization: `Bearer ${jwt}` },
-        method: "get",
-        baseURL: process.env.REACT_APP_SERVER,
-        url: "/user",
-      };
-      const userData = await axios(config);
-      this.setState({
-        userLoggedIn: userData.data,
-      });
-      console.log("drink", userData.data);
-    }
-  };
-
   addCocktailToFavorite = async (cocktail) => {
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
@@ -230,11 +213,10 @@ class App extends React.Component {
   };
 
   render() {
-    this.findOrCreateUser();
     return (
       <>
         <Router>
-          <ToastContainer className="position-fixed " position="top-center" >
+          <ToastContainer className="position-fixed " position="top-center">
             <Toast
               className="ml-5 mt-3"
               bg="danger"
@@ -261,6 +243,7 @@ class App extends React.Component {
           <Header />
           {this.props.auth0.isAuthenticated ? (
             <Routes>
+                <Route path="/welcome" element={<WelcomePage />}></Route>
               <Route
                 exact
                 path="/"

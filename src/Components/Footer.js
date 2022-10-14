@@ -1,5 +1,6 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
+import { Navbar, NavItem } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Footer extends React.Component {
   render() {
@@ -13,8 +14,13 @@ class Footer extends React.Component {
         variant="dark"
       >
         <Navbar.Brand>
-          Team DrinkLink &copy; 2022 Sage Megan Diego Matthew
+          Team DrinkLink &copy; 2022   Sage   Megan   Diego   Matthew
         </Navbar.Brand>
+        <NavItem>
+            <Link to="/aboutus" className="nav-link" style={{ color: "white" }}>
+              About us
+            </Link>
+          </NavItem>
       </Navbar>
     );
   }

@@ -4,7 +4,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { Link } from "react-router-dom";
 // import '../Styles/Cardstyle.scss';
 
-
 class Home extends React.Component {
 
     render() {

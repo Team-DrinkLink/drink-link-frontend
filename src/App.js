@@ -63,7 +63,7 @@ searchDrink = async (term) => {
     this.setState({drinkResults: request.data.drinks})
     } 
     }catch (error) {
-      console.log("searching error - ", error)
+      console.log("searching error - ", error);
     }
     }
 

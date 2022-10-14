@@ -21,11 +21,7 @@ class Header extends React.Component {
             </Link>
           </NavItem>
           <NavItem>
-            <Link
-              to="/favorites"
-              className="nav-link"
-              style={{ color: "white" }}
-            >
+            <Link to="/favorites" className="nav-link" style={{ color: "white" }}>
               Favorites
             </Link>
           </NavItem>

@@ -4,6 +4,7 @@ import axios from "axios";
 // import './Styles/Cardstyle.scss'
 import Footer from "./Components/Footer.js";
 import Header from "./Components/Header.js";
+import AboutUs from "./Components/AboutUs.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { withAuth0 } from "@auth0/auth0-react";
 import Home from "./Components/Home.js";
@@ -230,7 +231,7 @@ class App extends React.Component {
   };
 
   render() {
-    this.findOrCreateUser();
+    // this.findOrCreateUser();
     return (
       <>
         <Router>
@@ -294,6 +295,19 @@ class App extends React.Component {
                 path="/favorites"
                 element={
                   <Favorites
+                    userFavorites={this.state.userFavorites}
+                    drinkResults={this.state.drinkResults}
+                    getFavoriteCocktails={this.getFavoriteCocktails}
+                    deleteFavoriteCockTail={this.deleteFavoriteCockTail}
+                    setSelectedDrink={this.setSelectedDrink}
+                  />
+                }
+              ></Route>
+               <Route
+                exact
+                path="/aboutus"
+                element={
+                  <AboutUs
                     userFavorites={this.state.userFavorites}
                     drinkResults={this.state.drinkResults}
                     getFavoriteCocktails={this.getFavoriteCocktails}
